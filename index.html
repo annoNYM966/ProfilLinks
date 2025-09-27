@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reslan Profile Links</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      overflow: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .container {
+      display: flex;
+      gap: 50px;
+      z-index: 2;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .profile {
+      text-align: center;
+      background: rgba(255,255,255,0.07);
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 200px;
+      margin: 15px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .profile:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 0 35px rgba(255,255,255,0.25);
+    }
+
+    .profile img.logo {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+    }
+
+    .username {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Farben & Effekte */
+    .tiktok .username { color: #00f2ea; text-shadow: 0 0 8px #ff0050; }
+    .snapchat .username { color: #fffc00; text-shadow: 0 0 8px #fffc00; }
+    .instagram .username { 
+      background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 8px rgba(255,0,150,0.6);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: inline-block;
+    }
+
+    /* Schnee */
+    .snow, .rain, .lightning {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Regen */
+    .raindrop {
+      position: absolute;
+      width: 2px;
+      height: 15px;
+      background: rgba(173,216,230,0.8);
+      top: -20px;
+      animation: rainFall linear;
+    }
+
+    @keyframes rainFall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Blitze */
+    .lightning {
+      background: white;
+      opacity: 0;
+    }
+
+    .flash {
+      animation: flash 0.2s ease-in-out;
+    }
+
+    @keyframes flash {
+      0% { opacity: 0; }
+      25% { opacity: 0.8; }
+      50% { opacity: 0; }
+      75% { opacity: 0.6; }
+      100% { opacity: 0; }
+    }
+
+    /* Responsive Anpassung */
+    @media (max-width: 768px) {
+      .profile {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="snow" id="snow"></div>
+  <div class="rain" id="rain"></div>
+  <div class="lightning" id="lightning"></div>
+
+  <div class="title">click to go to the profil</div>
+
+  <div class="container">
+    <!-- TikTok -->
+    <div class="profile tiktok">
+      <a href="https://www.tiktok.com/@7reslan.74579" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" class="logo">
+      </a>
+      <div class="username">@7reslan.74579</div>
+    </div>
+
+    <!-- Snapchat -->
+    <div class="profile snapchat">
+      <a href="https://www.snapchat.com/add/reslan7959" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/snapchat.svg" alt="Snapchat" class="logo">
+      </a>
+      <div class="username">@reslan7959</div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="profile instagram">
+      <a href="https://www.instagram.com/7reslan" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="logo">
+      </a>
+      <div class="username">@7reslan</div>
+    </div>
+  </div>
+
+  <script>
+    const snowContainer = document.getElementById('snow');
+    const rainContainer = document.getElementById('rain');
+    const lightning = document.getElementById('lightning');
+
+    // Schnee
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      snowflake.style.fontSize = (Math.random() * 12 + 12) + 'px';
+      snowContainer.appendChild(snowflake);
+      setTimeout(() => { snowflake.remove(); }, 10000);
+    }
+    setInterval(createSnowflake, 100);
+
+    // Regen
+    function createRaindrop() {
+      const drop = document.createElement('div');
+      drop.classList.add('raindrop');
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+      rainContainer.appendChild(drop);
+      setTimeout(() => { drop.remove(); }, 2000);
+    }
+    setInterval(createRaindrop, 50);
+
+    // Blitze
+    function triggerLightning() {
+      lightning.classList.add('flash');
+      setTimeout(() => lightning.classList.remove('flash'), 200);
+    }
+    setInterval(() => {
+      if (Math.random() < 0.1) { // ca. alle paar Sekunden
+        triggerLightning();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
